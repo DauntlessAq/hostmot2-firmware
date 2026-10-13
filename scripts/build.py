@@ -129,7 +129,7 @@ common_vhdl = [
 ]
 
 def help_cards():
-    available = sorted(card.__name__ for card in cards.__dict__.values() if hasattr(card, 'name'))
+    available = sorted(card.__name__ for card in cards.__dict__.values() if hasattr(card, '__name__') and hasattr(card, 'name'))
     return "\n" + "\n".join(
         textwrap.wrap("Available cards: " + " ".join(available),
             subsequent_indent=" "*8)) + "\n"
@@ -143,7 +143,7 @@ def help_pins(card):
 def usage(hint='', card=''):
     usage =  __doc__ % sys.argv[0] + help_cards() + help_pins(card)
     if hint: usage += "\n" + hint
-    raise SystemExit, usage
+    raise SystemExit(usage)
 
 
 def mkdir(a):
@@ -172,7 +172,7 @@ else:
 
 
 d = os.path.splitext(outfile)[0] + "_work"
-print "# workdir", sq(d)
+print("# workdir", sq(d))
 if not os.path.isdir(d): os.makedirs(d)
 
 srcdir = os.path.join(orgdir, 'src')
@@ -185,12 +185,12 @@ cardvhdl = card.name+"card"
 pinvhdl = "PIN_" + pin
 topfile_in = s(getattr(card, 'topvhdl', '') or getattr(card, 'topmodule', '')) + ".vhd"
 topfile_out = os.path.splitext(outfile)[0] + ".vhd"
-print >>sys.stderr, topfile_in, topfile_out
-subst(topfile_in, topfile_out, CARD=cardvhdl, PIN=pinvhdl);
+print(topfile_in, topfile_out, file=sys.stderr)
+subst(topfile_in, topfile_out, CARD=cardvhdl, PIN=pinvhdl)
 
 all_vhdl = common_vhdl + [cardvhdl + '.vhd', pinvhdl + '.vhd', topfile_out]
 all_vhdl = [s(f) for f in all_vhdl]
-print all_vhdl
+print(all_vhdl)
 
 # Run everything from the temporary directory
 os.chdir(d)

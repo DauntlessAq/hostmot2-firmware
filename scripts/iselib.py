@@ -17,7 +17,7 @@ def subst(in_, out, **kw):
     s = r.sub(rfn, s)
     open(out, "w").write(s)
 
-_sq_whitelist = string.lowercase + string.uppercase + string.digits + ".-_/"
+_sq_whitelist = string.ascii_lowercase + string.ascii_uppercase + string.digits + ".-_/"
 def sq(a):
     if not a.strip(_sq_whitelist):
         return a
@@ -28,18 +28,19 @@ timing = []
 def run(*args):
     cmd = " ".join(sq(a) for a in args)
     if settings_sh is None:
-        raise RuntimeError, "Must call use_ise() before run()"
+        raise RuntimeError("Must call use_ise() before run()")
     # xilinx 13.3's settings32.sh uses bashisms
     cmd = "bash -c '. %s; %s'" % (settings_sh, cmd)
-    print "#", cmd
+    print("#", cmd)
     sys.stdout.flush()
     t0 = time.time()
     r = os.system(cmd)
-    print "# exited with", r; sys.stdout.flush()
+    print("# exited with", r)
+    sys.stdout.flush()
     t1 = time.time()
     timing.append((args[0], (t1-t0)))
     if r:
-        raise SystemExit, os.WEXITSTATUS(r) or 1
+        raise SystemExit(os.WEXITSTATUS(r) or 1)
 
 def guess_ise_version():
     with os.popen("map -h | head -1") as p:
@@ -65,8 +66,8 @@ def use_ise(iseversions):
 
         files = glob.glob('/opt/Xilinx/%s/*/settings64.sh' % ise)
         if len(files) > 1:
-            print "multiple settings files found!", files
-            raise SystemExit, 1
+            print("multiple settings files found!", files)
+            raise SystemExit(1)
         if len(files) == 1:
             settings_sh = files[0]
             break
@@ -85,14 +86,14 @@ def use_ise(iseversions):
         raise SystemExit("Firmware requires one of these ise major versions to build: %s"
                 % " ".join(map(str, iseversions)))
 
-    print "using Xilinx Webpack settings '%s'" % settings_sh
+    print("using Xilinx Webpack settings '%s'" % settings_sh)
 
 def report_timing():
     t =  m =  s = 0
     for k, v in timing:
         t += v
         m, s = divmod(v, 60)
-        print "%d:%04.1f-%-11s" % (m, s, k),
-    print "%d:%04.1f-total" % (m, s)
-    print
+        print("%d:%04.1f-%-11s" % (m, s, k), end=" ")
+    print("%d:%04.1f-total" % (m, s))
+    print()
 
