@@ -1,17 +1,17 @@
 #!/usr/bin/python
 import tarfile
 import sys
-import StringIO
+import io
 import time
 
 tarname, version = sys.argv[1:]
 
 tardata = sys.stdin.read()
-tarstream = StringIO.StringIO(tardata)
+tarstream = io.BytesIO(tardata)
 
-verstream = StringIO.StringIO(version+"\n")
+verstream = io.StringIO(version + "\n")
 verinfo = tarfile.TarInfo("%sVERSION" % tarname)
-verinfo.mode = 0664
+verinfo.mode = 0o664
 verinfo.size = len(verstream.getvalue())
 verinfo.mtime = time.time()
 

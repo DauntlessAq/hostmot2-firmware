@@ -24,6 +24,7 @@ import sys
 import re
 import tempfile
 import cards
+import subprocess
 
 card = sys.argv[1]
 card = cards.get_card(card)
@@ -37,11 +38,11 @@ def sq(a):
     return "'" + a.replace("'", "'\\''") + "'"
 
 def run(*args):
-    print >>sys.stderr, "#", " ".join([sq(a) for a in args])
-    r = os.spawnvp(os.P_WAIT, args[0], args)
-    print >>sys.stderr, "# exited with", r
+    print("#", " ".join([sq(a) for a in args]), file=sys.stderr)
+    r = subprocess.run(args).returncode
+    print("# exited with", r, file=sys.stderr)
     if r:
-        raise SystemExit, r
+        raise SystemExit(r)
 
 def p(*x): return os.path.join(d, *x)
 
@@ -56,7 +57,7 @@ def subst(in_, out, **kw):
     open(out, "w").write(s)
 
 d = tempfile.mkdtemp(prefix='hm2')
-print >>sys.stderr, "# tempdir", sq(d)
+print("# tempdir", sq(d), file=sys.stderr)
 atexit.register(shutil.rmtree, d)
 
 shutil.copy("IDROMConst.vhd", p("IDROMConst.vhd"))

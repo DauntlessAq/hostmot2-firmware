@@ -44,7 +44,7 @@ def subst(in_, out, **kw):
     open(out, "w").write(s)
 
 d = tempfile.mkdtemp(prefix='hm2')
-print >>sys.stderr, "# tempdir", sq(d)
+print("# tempdir", sq(d), file=sys.stderr)
 atexit.register(shutil.rmtree, d)
 
 sources = [
@@ -57,9 +57,9 @@ use_ise((13,10,9))
 
 with open(p("prj"), "wt") as f:
     for s in sources:
-        print >>f, "vhdl work", s
+        print("vhdl work", s, file=f)
 with open(p("scr"), "wt") as f:
-    print >>f, "run all\nexit"
+    print("run all\nexit", file=f)
 
 os.chdir(d)
 run("fuse", "-prj", "prj", "-o", "main", "pinmaker_%s" % pinvhdl)

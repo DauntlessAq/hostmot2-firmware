@@ -4,6 +4,7 @@ import re
 import string
 import sys
 import time
+import subprocess
 
 settings_sh = None
 
@@ -34,7 +35,7 @@ def run(*args):
     print("#", cmd)
     sys.stdout.flush()
     t0 = time.time()
-    r = os.system(cmd)
+    r = subprocess.run(cmd, shell=True).returncode
     print("# exited with", r)
     sys.stdout.flush()
     t1 = time.time()
@@ -43,7 +44,7 @@ def run(*args):
         raise SystemExit(os.WEXITSTATUS(r) or 1)
 
 def guess_ise_version():
-    with os.popen("map -h | head -1") as p:
+    with subprocess.Popen("map -h | head -1", shell=True, stdout=subprocess.PIPE, text=True) as p:
         info = p.read()
         info = info.split()[1].split(".")[0]
         try:
