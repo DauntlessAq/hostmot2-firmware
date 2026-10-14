@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding=utf-8
 #    build hostmot2 firmwares
 #    Copyright © 2009 Jeff Epler <jepler@unpythonic.net>

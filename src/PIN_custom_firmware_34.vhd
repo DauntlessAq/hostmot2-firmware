@@ -71,12 +71,12 @@ use work.IDROMConst.all;
 
 package PIN_custom_firmware_34 is
 	constant ModuleID : ModuleIDType :=( 
-		(WatchDogTag,	x"00",	ClockLowTag,	x"01",	WatchDogTimeAddr&PadT,		WatchDogNumRegs,		x"00",	WatchDogMPBitMask),
-		(IOPortTag,		x"00",	ClockLowTag,	x"02",	PortAddr&PadT,					IOPortNumRegs,			x"00",	IOPortMPBitMask),
-		(QcountTag,		x"02",	ClockLowTag,	x"02",	QcounterAddr&PadT,			QCounterNumRegs,		x"00",	QCounterMPBitMask),
-		(StepGenTag,	x"02",	ClockLowTag,	x"08",	StepGenRateAddr&PadT,		StepGenNumRegs,		x"00",	StepGenMPBitMask),
-		(PWMTag,			x"00",	ClockHighTag,	x"02",	PWMValAddr&PadT,				PWMNumRegs,				x"00",	PWMMPBitMask),
-		(LEDTag,			x"00",	ClockLowTag,	x"01",	LEDAddr&PadT,					LEDNumRegs,				x"00",	LEDMPBitMask),
+		(WatchDogTag,	x"00",	ClockLowTag,		x"01",	WatchDogTimeAddr&PadT,			WatchDogNumRegs,		x"00",	WatchDogMPBitMask),
+		(IOPortTag,		x"00",	ClockLowTag,		x"02",	PortAddr&PadT,					IOPortNumRegs,			x"00",	IOPortMPBitMask),
+		(QcountTag,		x"02",	ClockLowTag,		x"02",	QcounterAddr&PadT,				QCounterNumRegs,		x"00",	QCounterMPBitMask),
+		(StepGenTag,	x"02",	ClockLowTag,		x"08",	StepGenRateAddr&PadT,			StepGenNumRegs,			x"00",	StepGenMPBitMask),
+		(PWMTag,		x"00",	ClockHighTag,		x"02",	PWMValAddr&PadT,				PWMNumRegs,				x"00",	PWMMPBitMask),
+		(LEDTag,		x"00",	ClockLowTag,		x"01",	LEDAddr&PadT,					LEDNumRegs,				x"00",	LEDMPBitMask),
 		(NullTag,		x"00",	NullTag,			x"00",	NullAddr&PadT,					x"00",					x"00",	x"00000000"),
 		(NullTag,		x"00",	NullTag,			x"00",	NullAddr&PadT,					x"00",					x"00",	x"00000000"),
 		(NullTag,		x"00",	NullTag,			x"00",	NullAddr&PadT,					x"00",					x"00",	x"00000000"),
@@ -107,41 +107,41 @@ package PIN_custom_firmware_34 is
 		
 	
 	constant PinDesc : PinDescType :=(
--- 	Base func  sec unit sec func 	 sec pin					-- external DB25
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 00	PIN 1		Output 2 just GPIO
-		IOPortTag & x"00" & PWMTag & PWMAOutPin,				-- I/O 01	PIN 14   Spindle DAC PWM
-		IOPortTag & x"00" & StepGenTag & StepGenStepPin,	-- I/O 02	PIN 2    X Step
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 03	PIN 15	just GPIO
-		IOPortTag & x"00" & StepGenTag & StepGenDirPin,		-- I/O 04	PIN 3		X Dir    
-		IOPortTag & x"00" & PWMTag & PWMBDirPin,				-- I/O 05	PIN 16   Spindle DAC Dir
-		IOPortTag & x"01" & StepGenTag & StepGenStepPin,	-- I/O 06	PIN 4		Y Step
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 07	PIN 17	Output 1 just GPIO
+	-- 	Base func  sec unit sec func 	 sec pin					-- external DB25
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 00	PIN 1	Output 2 just GPIO
+		IOPortTag & x"00" & PWMTag & PWMAOutPin,			-- I/O 01	PIN 14  Spindle DAC PWM
+		IOPortTag & x"00" & StepGenTag & StepGenStepPin,	-- I/O 02	PIN 2   X Step
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 03	PIN 15	just GPIO
+		IOPortTag & x"00" & StepGenTag & StepGenDirPin,		-- I/O 04	PIN 3	X Dir    
+		IOPortTag & x"00" & PWMTag & PWMBDirPin,			-- I/O 05	PIN 16  Spindle DAC Dir
+		IOPortTag & x"01" & StepGenTag & StepGenStepPin,	-- I/O 06	PIN 4	Y Step
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 07	PIN 17	Output 1 just GPIO
 		IOPortTag & x"01" & StepGenTag & StepGenDirPin,		-- I/O 08	PIN 5 	Y Dir
-		IOPortTag & x"02" & StepGenTag & StepGenStepPin,	-- I/O 09	PIN 6		Z Step
-		IOPortTag & x"02" & StepGenTag & StepGenDirPin,		-- I/O 10	PIN 7		Z Dir
-		IOPortTag & x"03" & StepGenTag & StepGenStepPin,	-- I/O 11	PIN 8		A Step
-		IOPortTag & x"03" & StepGenTag & StepGenDirPin,		-- I/O 12	PIN 9		A Dir
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 13	PIN 10	Input 4 just GPIO
+		IOPortTag & x"02" & StepGenTag & StepGenStepPin,	-- I/O 09	PIN 6	Z Step
+		IOPortTag & x"02" & StepGenTag & StepGenDirPin,		-- I/O 10	PIN 7	Z Dir
+		IOPortTag & x"03" & StepGenTag & StepGenStepPin,	-- I/O 11	PIN 8	A Step
+		IOPortTag & x"03" & StepGenTag & StepGenDirPin,		-- I/O 12	PIN 9	A Dir
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 13	PIN 10	Input 4 just GPIO
 		IOPortTag & x"00" & QCountTag & QCountQAPin,  		-- I/O 14	PIN 11	Input 2 (Quad A)
 		IOPortTag & x"00" & QCountTag & QCountQBPin,  		-- I/O 15	PIN 12	Input 3 (Quad B)
 		IOPortTag & x"00" & QCountTag & QCountIdxPin,    	-- I/O 16	PIN 13	Input 4 (Quad Idx)
 		
-																					-- 26 HDR	-- IDC DB25	
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 17	PIN 1		PIN 1 	Output 2 just GPIO
-		IOPortTag & x"01" & PWMTag & PWMAOutPin,				-- I/O 18   PIN 2		PIN 14	Spindle DAC PWM
-		IOPortTag & x"04" & StepGenTag & StepGenStepPin,	-- I/O 19   PIN 3		PIN 2	   X2 Step
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 20	PIN 4		PIN 15	just GPIO
-		IOPortTag & x"04" & StepGenTag & StepGenDirPin,		-- I/O 21	PIN 5		PIN 3	   X2 Dir    
-		IOPortTag & x"01" & PWMTag & PWMBDirPin,				-- I/O 22	PIN 6		PIN 16	Spindle DAC DirHz)
-		IOPortTag & x"05" & StepGenTag & StepGenStepPin,	-- I/O 23	PIN 7		PIN 4	   Y2 Step
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 24	PIN 8		PIN 17	Output 1 just GPIO
-		IOPortTag & x"05" & StepGenTag & StepGenDirPin,		-- I/O 25	PIN 9		PIN 5	   Y2 Dir
-		IOPortTag & x"06" & StepGenTag & StepGenStepPin,	-- I/O 26	PIN 11	PIN 6	   Z2 Step
-		IOPortTag & x"06" & StepGenTag & StepGenDirPin,		-- I/O 27	PIN 13	PIN 7	   Z2 Dir
-		IOPortTag & x"07" & StepGenTag & StepGenStepPin,	-- I/O 28	PIN 15	PIN 8	   A2 Step
-		IOPortTag & x"07" & StepGenTag & StepGenDirPin,		-- I/O 29	PIN 17	PIN 9	   A2 Dir
-		IOPortTag & x"00" & NullTag & NullPin,					-- I/O 30	PIN 19	PIN 10	Input 4 just GPIO
-		IOPortTag & x"01" & QCountTag & QCountQAPin,  		-- I/O 31	PIN 21	PIN 11  	Input 2 (Quad A)
+																	-- 26 HDR	-- IDC DB25	
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 17	PIN 1	PIN 1 	Output 2 just GPIO
+		IOPortTag & x"01" & PWMTag & PWMAOutPin,			-- I/O 18   PIN 2	PIN 14	Spindle DAC PWM
+		IOPortTag & x"04" & StepGenTag & StepGenStepPin,	-- I/O 19   PIN 3	PIN 2	X2 Step
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 20	PIN 4	PIN 15	just GPIO
+		IOPortTag & x"04" & StepGenTag & StepGenDirPin,		-- I/O 21	PIN 5	PIN 3	X2 Dir    
+		IOPortTag & x"01" & PWMTag & PWMBDirPin,			-- I/O 22	PIN 6	PIN 16	Spindle DAC DirHz)
+		IOPortTag & x"05" & StepGenTag & StepGenStepPin,	-- I/O 23	PIN 7	PIN 4	Y2 Step
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 24	PIN 8	PIN 17	Output 1 just GPIO
+		IOPortTag & x"05" & StepGenTag & StepGenDirPin,		-- I/O 25	PIN 9	PIN 5	Y2 Dir
+		IOPortTag & x"06" & StepGenTag & StepGenStepPin,	-- I/O 26	PIN 11	PIN 6	Z2 Step
+		IOPortTag & x"06" & StepGenTag & StepGenDirPin,		-- I/O 27	PIN 13	PIN 7	Z2 Dir
+		IOPortTag & x"07" & StepGenTag & StepGenStepPin,	-- I/O 28	PIN 15	PIN 8	A2 Step
+		IOPortTag & x"07" & StepGenTag & StepGenDirPin,		-- I/O 29	PIN 17	PIN 9	A2 Dir
+		IOPortTag & x"00" & NullTag & NullPin,				-- I/O 30	PIN 19	PIN 10	Input 4 just GPIO
+		IOPortTag & x"01" & QCountTag & QCountQAPin,  		-- I/O 31	PIN 21	PIN 11  Input 2 (Quad A)
 		IOPortTag & x"01" & QCountTag & QCountQBPin,  		-- I/O 32	PIN 23	PIN 12	Input 3 (Quad B))
 		IOPortTag & x"01" & QCountTag & QCountIdxPin,    	-- I/O 33	PIN 25	PIN 13	Input 4 (Quad Idx)
 		
